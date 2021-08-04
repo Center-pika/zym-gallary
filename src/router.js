@@ -1,0 +1,22 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+import Gallary from '@/components/Gallary'
+import About from '@/components/About'
+
+Vue.use(Router)
+
+export default new Router({
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            name: 'Gallary',
+            component: Gallary
+        },
+        {
+            path: '/about',
+            name: 'About',
+            component: About
+        }
+    ]
+})
