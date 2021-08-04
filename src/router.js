@@ -11,12 +11,18 @@ export default new Router({
         {
             path: '/',
             name: 'Gallary',
-            component: Gallary
+            component: Gallary,
+            meta: {
+                title: '张月铭博物馆'
+            }
         },
         {
             path: '/about',
             name: 'About',
-            component: About
+            component: About,
+            meta: {
+                title: '关于'
+            }
         }
     ]
 })
