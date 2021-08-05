@@ -10,5 +10,5 @@ module.exports = {
     ]
   },
 
-  publicPath: '/zym-gallary/'
+  publicPath: process.env.NODE_ENV === 'development' ? './' : '/zym-gallary/'
 }

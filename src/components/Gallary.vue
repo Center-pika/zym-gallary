@@ -9,7 +9,7 @@
       :maxCols="6"
     >
       <div slot="waterfall-over">
-        <h5>Photoed By ZYM</h5>
+        <h5>Photoed By SNH-48 张月铭</h5>
         <p>Presented By 中心皮卡丘</p>
       </div>
     </waterfall>
@@ -27,6 +27,7 @@ export default {
   },
   props: {
     collapsed: Boolean,
+    base: String,
   },
   data() {
     return {
@@ -39,9 +40,11 @@ export default {
   },
   methods: {
     getData() {
-      axios.get("./static/data.json").then((res) => {
-        // this.all_imgs = res.data
-        this.all_imgs = res.data
+      axios.get(this.base + "static/data.json").then((res) => {
+        this.all_imgs = res.data.map((x) => {
+          x["src"] = this.base + "static/images/" + x["name"];
+          return x;
+        });
         this.loadImg();
       });
     },

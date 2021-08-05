@@ -18,7 +18,7 @@
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <router-link to="/" class="nav-link">Gallary</router-link>
+              <router-link to="/zym-gallary" class="nav-link">Gallary</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/about" class="nav-link">About</router-link>
@@ -27,7 +27,7 @@
         </div>
       </nav>
     </div>
-    <router-view :collapsed="this.collapsed"/>
+    <router-view :collapsed="this.collapsed" :base="this.base"/>
   </div>
 </template>
 <script>
@@ -39,7 +39,8 @@ export default {
   components: {},
   data() {
     return {
-      collapsed: true
+      collapsed: true,
+      base: process.env.BASE_URL
     }
   },
   methods: {

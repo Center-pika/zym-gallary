@@ -2,7 +2,10 @@
   <div class="hello">
     <div class="container">
       <div class="row">
-        <img src="static/avatar.jpg" class="avater rounded mx-auto" />
+        <img
+          :src="this.base + 'static/avatar.jpg'"
+          class="avater rounded mx-auto"
+        />
       </div>
       <div class="row">
         <h1>张月铭</h1>
@@ -20,7 +23,9 @@
 <script>
 export default {
   name: "About",
-  props: {},
+  props: {
+    base: String,
+  },
 };
 </script>
 
