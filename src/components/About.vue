@@ -10,7 +10,7 @@
       <div class="row">
         <h1>张月铭</h1>
         <h3>SNH-48 十五期生</h3>
-        <h3>Team HII 预备生</h3>
+        <h3>SNH-48 Team HII</h3>
       </div>
       <div class="row">
         <p>本站为粉丝自发搭建，记录张月铭的摄影作品和成长经历</p>

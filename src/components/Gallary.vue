@@ -4,7 +4,6 @@
       ref="waterfall"
       :imgsArr="imgs"
       @scrollReachBottom="loadImg"
-      @click="clickHandler"
       :imgWidth="280"
       :maxCols="6"
     >
@@ -43,6 +42,8 @@ export default {
       axios.get(this.base + "static/data.json").then((res) => {
         this.all_imgs = res.data.map((x) => {
           x["src"] = this.base + "static/images/" + x["name"];
+          x["href"] =
+            this.base + "static/images/" + x["name"].replace("thumb_", "");
           return x;
         });
         this.loadImg();
@@ -59,9 +60,9 @@ export default {
       );
       this.group++;
     },
-    clickHandler(event) {
-      event.preventDefault();
-    },
+    // clickHandler(event) {
+    //   event.preventDefault();
+    // },
   },
   created() {
     this.getData();

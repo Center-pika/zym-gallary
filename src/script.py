@@ -6,7 +6,7 @@ path = os.path.join('../', 'public', 'static', 'images')
 
 def build_josn():
 
-    images = sorted(os.listdir(path))
+    images = sorted(os.listdir(path), reverse=True)
     data = [{
         'name': name,
         'href': '#',
