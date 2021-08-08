@@ -4,13 +4,13 @@ from PIL import Image
 
 path = os.path.join('../', 'public', 'static', 'images')
 
-def build_josn():
+def build_json():
 
     images = sorted(os.listdir(path), reverse=True)
     data = [{
         'name': name,
         'href': '#',
-        'info': ''
+        'info': '{}/{}'.format(name[10:12], name[12:14])
     } for name in images if not name.startswith('.') and name.startswith('thumb')]
     f = open(os.path.join('..', 'public', 'static', 'data.json'), 'w')
     f.write(json.dumps(data))
@@ -27,4 +27,4 @@ def build_thumb():
 
 if __name__ == '__main__':
     build_thumb()
-    build_josn()
+    build_json()

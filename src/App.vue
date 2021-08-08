@@ -28,7 +28,7 @@
               >
                 Gallary
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                 <li>
                   <router-link to="/zym-gallary" class="dropdown-item"
                     >2021 起航</router-link
@@ -66,11 +66,6 @@ export default {
         node = node.parentElement;
       }
       this.collapsed = node.className.indexOf("collapsed") >= 0;
-    },
-  },
-  watch: {
-    collapsed() {
-      console.log(this.collapsed);
     },
   },
 };

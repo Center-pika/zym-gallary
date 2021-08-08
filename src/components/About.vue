@@ -12,9 +12,12 @@
         <h3>SNH-48 十五期生</h3>
         <h3>SNH-48 Team HII</h3>
       </div>
-      <div class="row">
-        <p>本站为粉丝自发搭建，记录张月铭的摄影作品和成长经历</p>
-        <p>除图源来自SNH-48张月铭女士外，其余均为粉丝个人行为</p>
+      <div class="alert alert-primary mt-4" role="alert">
+        <h4 class="alert-heading">声明</h4>
+        <hr />
+        <p class="mb-0">
+          本站为粉丝自发搭建，记录张月铭的摄影作品和成长经历,除图源来自SNH-48张月铭女士外，其余均为粉丝个人行为
+        </p>
       </div>
     </div>
   </div>
@@ -31,8 +34,7 @@ export default {
 
 <style scoped>
 h1,
-h3,
-p {
+h3 {
   color: aliceblue;
 }
 .avater {
