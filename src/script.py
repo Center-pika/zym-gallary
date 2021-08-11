@@ -16,10 +16,13 @@ def build_json():
     f.write(json.dumps(data))
     f.close()
 
-def build_thumb():
+def build_thumb(process_all=False):
     width = 640
-    for name in os.listdir(path):
+    files = os.listdir(path)
+    for name in files:
         if name.startswith('.') or name.startswith('thumb'):
+            continue
+        if not process_all and 'thumb_'+name in files:
             continue
         img = Image.open(os.path.join(path, name))
         height = int(img.height*(width/img.width))
