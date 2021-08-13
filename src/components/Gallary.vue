@@ -4,7 +4,7 @@
       <WaterfallItem
         v-for="(item, index) in this.all_imgs['2021']['08']"
         :key="index"
-        class="col-lg-3 col-md-4 col-sm-6 col-xs-12 item"
+        width="270"
       >
         <img :src="item['src']" />
       </WaterfallItem>
@@ -25,7 +25,10 @@ import { Waterfall, WaterfallItem } from "vue2-waterfall";
 
 export default {
   name: "Gallary",
-  components: {},
+  components: {
+    Waterfall,
+    WaterfallItem,
+  },
   props: {
     collapsed: Boolean,
     base: String,
@@ -38,6 +41,10 @@ export default {
       // group_size: 15,
       // height: window.innerHeight,
       // col: 4,
+      option: {
+        columnWidth: 200,
+        gutter: 10
+      },
     };
   },
   methods: {
