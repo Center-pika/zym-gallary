@@ -16,6 +16,31 @@ def build_json():
     f.write(json.dumps(data))
     f.close()
 
+def build_json2():
+    images = sorted(os.listdir(path), reverse=True)
+    data = {}
+    for name in images:
+        if name.startswith('.') or not name.startswith('thumb'):
+            continue
+        year = name[6:10]
+        month = name[10:12]
+        d = {
+            'name': name,
+            'href': '#',
+            'info': '{}/{}'.format(name[10:12], name[12:14])
+        }
+        if year in data:
+            if month in data[year]:
+                data[year][month].append(d)
+            else:
+                data[year][month] = [d]
+        else:
+            data[year] = {}
+            data[year][month] = [d]
+    f = open(os.path.join('..', 'public', 'static', 'data2.json'), 'w')
+    f.write(json.dumps(data))
+    f.close()
+
 def build_thumb(process_all=False):
     width = 640
     files = os.listdir(path)
@@ -29,5 +54,6 @@ def build_thumb(process_all=False):
         img.resize((width, height)).save(os.path.join(path, 'thumb_'+name))
 
 if __name__ == '__main__':
-    build_thumb()
-    build_json()
+    # build_thumb()
+    # build_json()
+    build_json2()

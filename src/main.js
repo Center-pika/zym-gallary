@@ -1,10 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import waterfall from 'vue-waterfall2'
 
 
-Vue.use(waterfall)
 Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
