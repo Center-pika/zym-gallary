@@ -5,18 +5,6 @@ from PIL import Image
 path = os.path.join('../', 'public', 'static', 'images')
 
 def build_json():
-
-    images = sorted(os.listdir(path), reverse=True)
-    data = [{
-        'name': name,
-        'href': '#',
-        'info': '{}/{}'.format(name[10:12], name[12:14])
-    } for name in images if not name.startswith('.') and name.startswith('thumb')]
-    f = open(os.path.join('..', 'public', 'static', 'data.json'), 'w')
-    f.write(json.dumps(data))
-    f.close()
-
-def build_json2():
     images = sorted(os.listdir(path), reverse=True)
     data = {}
     for name in images:
@@ -33,7 +21,7 @@ def build_json2():
             data[month].append(d)
         else:
             data[month] = [d]
-    f = open(os.path.join('..', 'public', 'static', 'data2.json'), 'w')
+    f = open(os.path.join('..', 'public', 'static', 'data.json'), 'w')
     f.write(json.dumps(data))
     f.close()
 
@@ -50,6 +38,5 @@ def build_thumb(process_all=False):
         img.resize((width, height)).save(os.path.join(path, 'thumb_'+name))
 
 if __name__ == '__main__':
-    # build_thumb()
-    # build_json()
-    build_json2()
+    build_thumb()
+    build_json()

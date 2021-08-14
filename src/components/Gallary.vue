@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     getData() {
-      axios.get(this.base + "static/data2.json").then((res) => {
+      axios.get(this.base + "static/data.json").then((res) => {
         var tmp = {};
         for (const month in res.data) {
           tmp[month] = [];
@@ -155,8 +155,8 @@ export default {
   margin-bottom: 15px;
 }
 .month-block {
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: 12px;
+  margin-right: 12px;
 }
 .item {
   padding-bottom: 1.5%;
