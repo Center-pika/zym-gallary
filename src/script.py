@@ -26,7 +26,8 @@ def build_json2():
         d = {
             'name': name,
             'href': '#',
-            'info': '{}/{}'.format(name[10:12], name[12:14])
+            'info': '{}/{}'.format(name[10:12], name[12:14]),
+            'landscape': False
         }
         if month in data:
             data[month].append(d)

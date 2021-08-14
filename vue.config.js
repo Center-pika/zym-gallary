@@ -10,6 +10,10 @@ module.exports = {
       })
     ]
   },
-
-  publicPath: process.env.NODE_ENV === 'development' ? './' : '/zym-gallary/'
+  publicPath: process.env.NODE_ENV === 'development' ? './' : '/zym-gallary/',
+  devServer: {
+    port: 8080,
+    public: 'localhost:8080',
+    host: 'localhost'
+  }
 }

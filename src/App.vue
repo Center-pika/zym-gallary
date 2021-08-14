@@ -11,7 +11,6 @@
           aria-controls="navbar"
           aria-expanded="false"
           aria-label="Toggle navigation"
-          @click="heightCheck"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -43,7 +42,7 @@
         </div>
       </nav>
     </div>
-    <router-view :collapsed="this.collapsed" :base="this.base" />
+    <router-view :base="this.base" />
   </div>
 </template>
 <script>
@@ -55,18 +54,8 @@ export default {
   components: {},
   data() {
     return {
-      collapsed: true,
       base: process.env.BASE_URL,
     };
-  },
-  methods: {
-    heightCheck(e) {
-      var node = e.target;
-      if (node.tagName == "SPAN") {
-        node = node.parentElement;
-      }
-      this.collapsed = node.className.indexOf("collapsed") >= 0;
-    },
   },
 };
 </script>

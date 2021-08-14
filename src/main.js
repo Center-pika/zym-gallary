@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import { VueMasonryPlugin } from "vue-masonry";
+
+Vue.use(VueMasonryPlugin);
 
 Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
@@ -16,5 +19,5 @@ new Vue({
   router
 }).$mount('#app')
 
-var ghpages = require('gh-pages');
-ghpages.publish('dist');
+// var ghpages = require('gh-pages');
+// ghpages.publish('dist');
