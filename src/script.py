@@ -22,21 +22,16 @@ def build_json2():
     for name in images:
         if name.startswith('.') or not name.startswith('thumb'):
             continue
-        year = name[6:10]
         month = name[10:12]
         d = {
             'name': name,
             'href': '#',
             'info': '{}/{}'.format(name[10:12], name[12:14])
         }
-        if year in data:
-            if month in data[year]:
-                data[year][month].append(d)
-            else:
-                data[year][month] = [d]
+        if month in data:
+            data[month].append(d)
         else:
-            data[year] = {}
-            data[year][month] = [d]
+            data[month] = [d]
     f = open(os.path.join('..', 'public', 'static', 'data2.json'), 'w')
     f.write(json.dumps(data))
     f.close()
