@@ -34,7 +34,9 @@
       </div>
     </div>
 
-    <div v-if="this.loading">Loading</div>
+    <div v-if="this.loading">
+      <p>Loading</p>
+    </div>
     <div v-if="this.allLoaded">
       <div class="row footer">
         <h3>Photoed By SNH-48 张月铭</h3>
@@ -154,6 +156,7 @@ export default {
   margin-top: 15px;
   margin-bottom: 15px;
 }
+.footer,
 .month-block {
   margin-left: 12px;
   margin-right: 12px;
