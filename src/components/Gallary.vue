@@ -1,6 +1,6 @@
 <template>
   <div class="gallary">
-    <div class="month-block" v-for="(month, index) in months" :key="index">
+    <div class="month-block" v-for="(month, index) in shownMonths" :key="index">
       <div class="header">{{ month }} 月</div>
       <div
         v-masonry
@@ -60,7 +60,7 @@ export default {
       shownData: {},
       data: {},
       months: [],
-      monthIdx: 0,
+      shownMonths: [],
       width: window.innerWidth,
       loading: false,
       allLoaded: false,
@@ -88,19 +88,20 @@ export default {
       });
     },
     loadMore() {
-      if (this.monthIdx >= this.months.length) {
+      if (this.months.length == 0) {
         this.allLoaded = true;
         this.loading = false;
         return;
       }
       this.loading = true;
       var tmp = {};
-      let monthToLoad = this.months.slice(this.monthIdx, this.monthIdx + 2);
-      for (const idx in monthToLoad) {
-        let month = monthToLoad[idx];
-        tmp[month] = this.data[month];
+      for (let i = 0; i < 2.; i++) {
+          let month = this.months.shift()
+          if(month) {
+            tmp[month] = this.data[month]
+            this.shownMonths.push(month)
+          }        
       }
-      this.monthIdx += 2;
       this.shownData = Object.assign({}, tmp, this.shownData);
       this.loading = false;
     },
