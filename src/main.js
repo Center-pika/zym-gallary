@@ -22,5 +22,5 @@ new Vue({
   router
 }).$mount('#app')
 
-var ghpages = require('gh-pages');
-ghpages.publish('dist');
+// var ghpages = require('gh-pages');
+// ghpages.publish('dist');

@@ -7,7 +7,8 @@ import Secret from '@/components/Secret'
 Vue.use(Router)
 
 export default new Router({
-    mode: 'history',
+    // mode: 'history',
+    base: '/gallary',
     routes: [
         {
             path: '/',

@@ -4,7 +4,7 @@
       <div class="header">{{ month }} 月</div>
       <div
         v-masonry
-        transition-duration="0.1s"
+        transition-duration="0.2s"
         item-selector=".item"
         columnWidth=".grid-sizer"
         gutter=".gutter-sizer"
@@ -27,8 +27,8 @@
           v-for="(item, index) in shownData[month]"
           :style="{ width: itemWidth + '%' }"
         >
-          <a :href="item.href" target="tab"
-            ><img :src="item.src" width="100%"
+          <a :href="base + 'images/' + item.src" target="tab"
+            ><img :src="base + 'images/' + item.thumb" width="100%"
           /></a>
         </div>
       </div>
@@ -38,7 +38,7 @@
       <p>Loading</p>
     </div>
     <div v-if="this.allLoaded">
-      <div class="row footer">
+      <div class="row footer w-100">
         <h3>Photoed By SNH-48 张月铭</h3>
         <p>Presented By 中心皮卡丘</p>
       </div>
@@ -68,23 +68,24 @@ export default {
   },
   methods: {
     getData() {
-      axios.get(this.base + "static/data.json").then((res) => {
+      let that = this;
+      this.months = [];
+      axios.get("/api/gallary.php").then((res) => {
         var tmp = {};
-        for (const month in res.data) {
-          tmp[month] = [];
-          for (const x in res.data[month]) {
-            var item = res.data[month][x];
-            item["src"] = this.base + "static/images/" + item["name"];
-            item["href"] =
-              this.base + "static/images/" + item["name"].replace("thumb_", "");
-            tmp[month].push(item);
+        for (const index in res.data) {
+          let item = res.data[index];
+          let month = item.month;
+          if (!(month in tmp)) {
+            tmp[month] = [];
+            that.months.push(month);
           }
+          tmp[month].push(item);
         }
-        this.months = Object.keys(res.data).sort((a, b) => {
-          a < b;
+        that.months = that.months.sort((a, b) => {
+          a > b;
         });
-        this.data = tmp;
-        this.loadMore();
+        that.data = tmp;
+        that.loadMore();
       });
     },
     loadMore() {
@@ -95,12 +96,12 @@ export default {
       }
       this.loading = true;
       var tmp = {};
-      for (let i = 0; i < 2.; i++) {
-          let month = this.months.shift()
-          if(month) {
-            tmp[month] = this.data[month]
-            this.shownMonths.push(month)
-          }        
+      for (let i = 0; i < 2; i++) {
+        let month = this.months.shift();
+        if (month) {
+          tmp[month] = this.data[month];
+          this.shownMonths.push(month);
+        }
       }
       this.shownData = Object.assign({}, tmp, this.shownData);
       this.loading = false;

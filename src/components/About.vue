@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row top-area" @click="avaterOnClick">
         <img
-          :src="this.base + 'static/avatar.jpg'"
+          src="@/assets/avatar.jpg"
           class="avater rounded mx-auto"
         />
       </div>
@@ -12,7 +12,7 @@
         <h3>SNH-48 十五期生</h3>
         <h3>SNH-48 Team HII</h3>
       </div>
-      <div class="row alert">
+      <div class="row alert mb-0">
         <div
           class="alert alert-primary mt-4 pb-4 col-md-4 offset-md-4"
           role="alert"
@@ -42,7 +42,7 @@
               <p>只要在石板上按下密码...</p>
               <div class="col-md-6 offset-md-3">
                 <form>
-                  <input :class="this.secretClass" ref="secretText" />
+                  <input :class="this.secretClass" ref="secretText" @keypress="checkSecret"/>
                   <button
                     type="button"
                     class="btn btn-primary"
@@ -111,6 +111,7 @@ export default {
   },
   mounted() {
     this.modal = new Modal(this.$refs.secret);
+    
   },
 };
 </script>

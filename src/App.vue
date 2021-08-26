@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="container-fluied" id="content">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <span class="navbar-brand nav-title" href="#">张月铭博物馆</span>
         <button
           class="navbar-toggler toggle-button"
@@ -27,9 +27,12 @@
               >
                 Gallary
               </a>
-              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+              <ul
+                class="dropdown-menu dropdown-menu-dark"
+                aria-labelledby="navbarDropdown"
+              >
                 <li>
-                  <router-link to="/zym-gallary" class="dropdown-item"
+                  <router-link to="/" class="dropdown-item"
                     >2021 起航</router-link
                   >
                 </li>
@@ -46,30 +49,27 @@
   </div>
 </template>
 <script>
-import "jquery/dist/jquery.min.js";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
 export default {
   name: "App",
   components: {},
   data() {
     return {
-      base: process.env.BASE_URL,
+      base: "http://121.36.164.142/",
     };
   },
 };
 </script>
 
 <style>
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  /* background-color: #262d33; */
 }
-body {
+html,body,#app {
   background-color: #262d33;
 }
 a {
