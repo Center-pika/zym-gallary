@@ -92,7 +92,7 @@ export default {
   methods: {
     avaterOnClick() {
       this.count += 1;
-      if (this.count == 5) {
+      if (this.count == 3) {
         this.modal.show();
         this.count = 0;
       }

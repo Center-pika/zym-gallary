@@ -7,6 +7,7 @@
         action="http://121.36.164.142/api/uploads.php"
         method="post"
         enctype="multipart/form-data"
+        @submit.prevent
       >
         <div class="mb-3 col-md-6 offset-md-3">
           <input
@@ -15,6 +16,7 @@
             id="file"
             name="files[]"
             ref="inputNode"
+            accept="image/jpeg,image/jpg,image/png"
             multiple
             @change="updateData"
           />
@@ -65,11 +67,30 @@
         <div v-else>
           <p>暂无待传数据</p>
         </div>
+        <div
+          id="success-alert"
+          class="alert alert-success"
+          role="alert"
+          v-if="status == 'success'"
+        >
+          上传成功！
+        </div>
+        <div
+          id="fail-alert"
+          class="alert alert-danger"
+          role="alert"
+          v-if="status == 'fail'"
+        >
+          上传失败！
+        </div>
         <input
           type="submit"
           name="submit"
-          class="btn btn-primary mb-3"
-          value="提交"
+          class="btn btn-primary mb-3 mt-3"
+          :value="uploading ? '上传中...' : '提交'"
+          ref="submitButton"
+          @click="upload"
+          :disabled="uploading"
         />
       </form>
     </div>
@@ -77,6 +98,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Secret",
   props: {},
@@ -84,10 +106,13 @@ export default {
     return {
       localImages: [],
       width: window.innerWidth,
+      uploading: false,
+      status: null,
     };
   },
   methods: {
     updateData(e) {
+      this.status = null;
       if (e.target.files.length < this.localImages.length) {
         return;
       }
@@ -104,7 +129,6 @@ export default {
       }
     },
     removeFileFromFileList(index) {
-      console.log("remove");
       const dt = new DataTransfer();
       const input = document.getElementById("file");
       const { files } = input;
@@ -116,6 +140,28 @@ export default {
       }
       input.files = dt.files;
       this.localImages.splice(index, 1);
+    },
+    upload() {
+      this.uploading = true;
+      let input = document.getElementById("file");
+      let { files } = input;
+      let data = new FormData();
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        data.append("files[" + i + "]", file);
+      }
+      let config = {
+        headers: { "Content-Type": "multipart/form-data" },
+      };
+      axios.post("/api/uploads.php", data, config).then((res) => {
+        this.uploading = false;
+        let status = res.data["status"];
+        if (status == "success") {
+          input.files = new DataTransfer().files;
+          this.localImages = [];
+        }
+        this.status = status;
+      });
     },
   },
   computed: {
@@ -156,5 +202,8 @@ p {
   top: -12px;
   right: -12px;
   z-index: 100;
+}
+.alert {
+  text-align: left;
 }
 </style>
