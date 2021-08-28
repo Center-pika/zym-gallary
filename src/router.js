@@ -19,22 +19,6 @@ export default new Router({
             }
         },
         {
-            path: '/zym-gallary',
-            name: 'Gallary2',
-            component: Gallary,
-            meta: {
-                title: '张月铭博物馆'
-            }
-        },
-        {
-            path: '/home',
-            name: 'Gallary3',
-            component: Gallary,
-            meta: {
-                title: '张月铭博物馆'
-            }
-        },
-        {
             path: '/about',
             name: 'About',
             component: About,

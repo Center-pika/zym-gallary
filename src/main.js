@@ -5,8 +5,12 @@ import "jquery/dist/jquery.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import { VueMasonryPlugin } from "vue-masonry";
+import VueLazyload from 'vue-lazyload'
 
 Vue.use(VueMasonryPlugin);
+Vue.use(VueLazyload, {
+  preLoad: 1.3
+})
 
 Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {

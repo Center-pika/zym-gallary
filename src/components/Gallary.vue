@@ -27,15 +27,25 @@
           v-for="(item, index) in shownData[month]"
           :style="{ width: itemWidth + '%' }"
         >
-          <a :href="base + 'images/' + item.src" target="tab"
-            ><img :src="base + 'images/' + item.thumb" width="100%"
-          /></a>
+          <a :href="base + 'images/' + item.src" target="tab">
+            <img
+              :src="
+                item.src in loaded
+                  ? base + 'images/' + item.thumb
+                  : 'https://via.placeholder.com/1/41464c?text=+'
+              "
+              width="100%"
+              :style="'aspect-ratio:' + 1/item.ratio"
+              :name="item.src"
+              @load="imageFinishLoading"
+            />
+          </a>
         </div>
       </div>
     </div>
 
     <div v-if="this.loading">
-      <p>Loading</p>
+      <p>Loading...</p>
     </div>
     <div v-if="this.allLoaded">
       <div class="row footer w-100">
@@ -59,6 +69,8 @@ export default {
     return {
       shownData: {},
       data: {},
+      loaded: {},
+      virtual_height: {},
       months: [],
       shownMonths: [],
       width: window.innerWidth,
@@ -70,6 +82,8 @@ export default {
     getData() {
       let that = this;
       this.months = [];
+      this.loaded = {};
+      this.virtual_height = {};
       axios.get("/api/gallary.php").then((res) => {
         var tmp = {};
         for (const index in res.data) {
@@ -80,6 +94,7 @@ export default {
             that.months.push(month);
           }
           tmp[month].push(item);
+          that.virtual_height[item.src] = Math.random() * 50 + 100;
         }
         that.months = that.months.sort((a, b) => {
           a > b;
@@ -117,6 +132,9 @@ export default {
           this.loadMore();
         }
       }
+    },
+    imageFinishLoading(e) {
+      this.$set(this.loaded, e.target.name, true)
     },
   },
   created() {
