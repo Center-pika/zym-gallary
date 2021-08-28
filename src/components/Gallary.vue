@@ -20,26 +20,23 @@
           class="gutter-sizer"
           :style="{ width: gutterWidth + '%' }"
         ></div>
-        <div
-          v-masonry-tile
-          class="item"
-          v-bind:key="index"
-          v-for="(item, index) in shownData[month]"
-          :style="{ width: itemWidth + '%' }"
-        >
-          <a :href="base + 'images/' + item.src" target="tab">
-            <img
-              :src="
-                item.src in loaded
-                  ? base + 'images/' + item.thumb
-                  : 'https://via.placeholder.com/1/41464c?text=+'
-              "
-              width="100%"
-              :style="'aspect-ratio:' + 1/item.ratio"
-              :name="item.src"
-              @load="imageFinishLoading"
-            />
-          </a>
+        <div v-lazy-container="{ selector: 'img' }">
+          <div
+            v-masonry-tile
+            class="item"
+            v-bind:key="index"
+            v-for="(item, index) in shownData[month]"
+            :style="{ width: itemWidth + '%' }"
+          >
+            <a :href="base + 'images/' + item.src" target="tab">
+              <img
+                :data-src="base + 'images/' + item.thumb"
+                width="100%"
+                :style="'aspect-ratio:' + 1 / item.ratio"
+                class="fadein"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -82,8 +79,6 @@ export default {
     getData() {
       let that = this;
       this.months = [];
-      this.loaded = {};
-      this.virtual_height = {};
       axios.get("/api/gallary.php").then((res) => {
         var tmp = {};
         for (const index in res.data) {
@@ -94,7 +89,6 @@ export default {
             that.months.push(month);
           }
           tmp[month].push(item);
-          that.virtual_height[item.src] = Math.random() * 50 + 100;
         }
         that.months = that.months.sort((a, b) => {
           a > b;
@@ -132,9 +126,6 @@ export default {
           this.loadMore();
         }
       }
-    },
-    imageFinishLoading(e) {
-      this.$set(this.loaded, e.target.name, true)
     },
   },
   created() {
@@ -189,5 +180,32 @@ export default {
 }
 .footer {
   color: white;
+}
+.item img {
+  background-color: #41464c;
+}
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fadein[lazy="loaded"] {
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
 }
 </style>
