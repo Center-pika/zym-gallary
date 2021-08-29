@@ -42,7 +42,7 @@
                   <input
                     :class="this.secretClass"
                     ref="secretText"
-                    @keypress="checkSecret"
+                    @submit.prevent="checkSecret"
                   />
                   <button
                     type="button"
@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import Modal from "bootstrap/js/dist/modal";
 
 export default {
@@ -82,11 +83,10 @@ export default {
     return {
       count: 0,
       modal: null,
-      invalidSecret: false,
       secretClass: {
         "form-control": true,
         "mb-3": true,
-        "is-valid": this.invalidSecret,
+        "is-invalid": false,
       },
     };
   },
@@ -100,14 +100,18 @@ export default {
     },
     checkSecret() {
       let text = this.$refs.secretText.value;
-      // validate text and get session
-      if (text != "zymiao") {
-        this.invalidSecret = true;
-      } else {
-        this.modal.hide();
-        this.invalidSecret = false;
-        this.$router.push("/secret");
-      }
+      axios.get("/api/auth.php?secret=" + text).then((res) => {
+        let status = res.data['status']
+        if (status == "success") {
+          this.$store.commit('changeToken', res.data.token)
+          this.modal.hide()
+          this.$set(this.secretClass, "is-invalid", false)
+          this.$router.push("/secret")
+        } else {
+          this.$set(this.secretClass, "is-invalid", true)
+          console.log('error')
+        }
+      });
     },
   },
   mounted() {

@@ -102,6 +102,7 @@
           :disabled="uploading || this.fileSize > 200"
         />
       </form>
+      <!-- <button @click="tokenClear">test</button> -->
     </div>
   </div>
 </template>
@@ -176,6 +177,9 @@ export default {
         this.status = status;
       });
     },
+    tokenClear() {
+      this.$store.commit('clearToken')
+    }
   },
   computed: {
     itemWidth() {
