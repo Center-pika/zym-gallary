@@ -13,8 +13,8 @@ module.exports = {
   },
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   // publicPath: './',
-  configureWebpack: { // webpack 配置
-    output: { // 输出重构  打包编译后的 文件名称  【模块名称.版本号.时间戳】
+  configureWebpack: {
+    output: {
       filename: `[name].${process.env.VUE_APP_Version}.${Timestamp}.js`,
       chunkFilename: `[name].${process.env.VUE_APP_Version}.${Timestamp}.js`
     },
@@ -23,6 +23,8 @@ module.exports = {
     port: 8080,
     public: 'localhost:8080',
     host: 'localhost',
+    // host: '192.168.2.9',
+    hot:true,
     proxy: {
       '/api': {
         target: 'http://121.36.164.142/',

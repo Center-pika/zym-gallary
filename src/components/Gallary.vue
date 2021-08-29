@@ -28,14 +28,21 @@
             v-for="(item, index) in shownData[month]"
             :style="{ width: itemWidth + '%' }"
           >
-            <a :href="base + 'images/' + item.src" target="tab">
-              <img
-                :data-src="base + 'images/' + item.thumb"
-                width="100%"
-                :style="'aspect-ratio:' + 1 / item.ratio"
-                class="fadein"
-              />
-            </a>
+            <div
+              :style="{
+                width: '100%',
+                'padding-bottom': item.ratio * 100 + '%',
+              }"
+              class="img-wrapper"
+            >
+              <a :href="base + 'images/' + item.src" target="tab">
+                <img
+                  :data-src="base + 'images/' + item.thumb"
+                  width="100%"
+                  class="fadein"
+                />
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -44,8 +51,8 @@
     <div v-if="this.loading">
       <p>Loading...</p>
     </div>
-    <div v-if="this.allLoaded">
-      <div class="row footer w-100">
+    <div v-if="this.allLoaded" :style="'width:95%'">
+      <div class="row footer">
         <h3>Photoed By SNH-48 张月铭</h3>
         <p>Presented By 中心皮卡丘</p>
       </div>
@@ -175,14 +182,22 @@ export default {
 .item {
   padding-bottom: 1.5%;
 }
-.item img {
+.item .img-wrapper {
   border-radius: 5px;
 }
 .footer {
   color: white;
 }
-.item img {
+.item .img-wrapper {
   background-color: #41464c;
+}
+.img-wrapper img {
+  position: absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  border-radius: 5px;
 }
 @-webkit-keyframes fadeIn {
   from {
