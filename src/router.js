@@ -31,7 +31,8 @@ export default new Router({
             name: 'Secret',
             component: Secret,
             meta: {
-                title: '月亮列车停靠站'
+                title: '月亮列车停靠站',
+                requiresAuth: true
             }
         }
     ]

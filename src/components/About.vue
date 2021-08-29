@@ -2,15 +2,12 @@
   <div class="aboud">
     <div class="container">
       <div class="row top-area" @click="avaterOnClick">
-        <img
-          src="@/assets/avatar.jpg"
-          class="avater rounded mx-auto"
-        />
+        <img src="@/assets/avatar.jpg" class="avater rounded mx-auto" />
       </div>
       <div class="row info">
         <h1>张月铭</h1>
+        <h3>SNH-48 Team HII 成员</h3>
         <h3>SNH-48 十五期生</h3>
-        <h3>SNH-48 Team HII</h3>
       </div>
       <div class="row alert mb-0">
         <div
@@ -42,7 +39,11 @@
               <p>只要在石板上按下密码...</p>
               <div class="col-md-6 offset-md-3">
                 <form>
-                  <input :class="this.secretClass" ref="secretText" @keypress="checkSecret"/>
+                  <input
+                    :class="this.secretClass"
+                    ref="secretText"
+                    @keypress="checkSecret"
+                  />
                   <button
                     type="button"
                     class="btn btn-primary"
@@ -70,7 +71,7 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal';
+import Modal from "bootstrap/js/dist/modal";
 
 export default {
   name: "About",
@@ -111,7 +112,6 @@ export default {
   },
   mounted() {
     this.modal = new Modal(this.$refs.secret);
-    
   },
 };
 </script>

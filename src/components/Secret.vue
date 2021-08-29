@@ -22,6 +22,7 @@
           />
         </div>
         <div class="header">预览</div>
+        <div class="sub-header">单次上传限制 {{ this.fileSize }}M / 200M</div>
         <div
           v-masonry
           transition-duration="0.1s"
@@ -48,7 +49,7 @@
             v-for="(item, index) in localImages"
             :style="{ width: itemWidth + '%' }"
           >
-            <img :src="item" width="100%" />
+            <img :src="item.data" width="100%" />
             <a @click="removeFileFromFileList(index)"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -83,6 +84,14 @@
         >
           上传失败！
         </div>
+        <div
+          id="fail-alert"
+          class="alert alert-danger"
+          role="alert"
+          v-if="this.fileSize > 200"
+        >
+          文件大小超过200M，请分次上传哦～
+        </div>
         <input
           type="submit"
           name="submit"
@@ -90,7 +99,7 @@
           :value="uploading ? '上传中...' : '提交'"
           ref="submitButton"
           @click="upload"
-          :disabled="uploading"
+          :disabled="uploading || this.fileSize > 200"
         />
       </form>
     </div>
@@ -108,6 +117,7 @@ export default {
       width: window.innerWidth,
       uploading: false,
       status: null,
+      full: false,
     };
   },
   methods: {
@@ -124,7 +134,10 @@ export default {
         let reader = new FileReader();
         reader.readAsDataURL(item);
         reader.addEventListener("load", function () {
-          that.localImages.push(this.result);
+          that.localImages.push({
+            data: this.result,
+            size: (item.size / 1024 / 1024).toFixed(2),
+          });
         });
       }
     },
@@ -177,6 +190,12 @@ export default {
     gutterWidth() {
       return 1.5;
     },
+    fileSize() {
+      return this.localImages
+        .map((x) => parseFloat(x.size))
+        .reduce((a, b) => a + b, 0)
+        .toFixed(2);
+    },
   },
   mounted() {
     window.onresize = () => {
@@ -190,6 +209,14 @@ export default {
 h1,
 h3 {
   color: aliceblue;
+}
+.sub-header {
+  color: slategray;
+  text-align: left;
+  font-size: 17px;
+  width: 100%;
+  padding-left: 7px;
+  margin-bottom: 15px;
 }
 .row {
   margin-top: 70px;

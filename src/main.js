@@ -15,6 +15,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title
   }
+  // if (!to.matched.some(record => record.meta.requiresAuth))
   next()
 })
 
