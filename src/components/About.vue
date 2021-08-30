@@ -42,7 +42,7 @@
                   <input
                     :class="this.secretClass"
                     ref="secretText"
-                    @submit.prevent="checkSecret"
+                    @keyup.enter="checkSecret"
                   />
                   <button
                     type="button"
@@ -109,7 +109,6 @@ export default {
           this.$router.push("/secret")
         } else {
           this.$set(this.secretClass, "is-invalid", true)
-          console.log('error')
         }
       });
     },

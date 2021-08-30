@@ -47,14 +47,15 @@
         </div>
       </div>
     </div>
-
-    <div v-if="this.loading">
-      <p>Loading...</p>
-    </div>
-    <div v-if="this.allLoaded" :style="'width:95%'">
-      <div class="row footer">
-        <h3>Photoed By SNH-48 张月铭</h3>
-        <p>Presented By 中心皮卡丘</p>
+    <div class="footer">
+      <div v-if="this.loading">
+        <p>Loading...</p>
+      </div>
+      <div v-if="this.allLoaded">
+        <div >
+          <h3>Photoed By SNH-48 张月铭</h3>
+          <p>Presented By 中心皮卡丘</p>
+        </div>
       </div>
     </div>
   </div>
@@ -193,10 +194,10 @@ export default {
 }
 .img-wrapper img {
   position: absolute;
-  top:0;
-  left:0;
-  bottom:0;
-  right:0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   border-radius: 5px;
 }
 @-webkit-keyframes fadeIn {
