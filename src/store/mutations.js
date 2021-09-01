@@ -1,6 +1,5 @@
 export default {
     changeToken(state, token) {
-        console.log(token)
         //登录或者注册时，存储token的方法
         state.token = token
         try {

@@ -15,7 +15,7 @@ export default new Router({
             name: 'Gallary',
             component: Gallary,
             meta: {
-                title: '张月铭博物馆'
+                title: '启铭星博物馆'
             }
         },
         {
@@ -31,7 +31,7 @@ export default new Router({
             name: 'Secret',
             component: Secret,
             meta: {
-                title: '月亮列车停靠站',
+                title: '星空邮局投递箱',
                 requiresAuth: true
             }
         }

@@ -1,7 +1,7 @@
 <template>
   <div class="secret">
     <div class="container">
-      <div class="row"><h1>月亮列车停靠站</h1></div>
+      <div class="row"><h1>星空邮局投递箱</h1></div>
 
       <form
         action="http://121.36.164.142/api/uploads.php"

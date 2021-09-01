@@ -2,7 +2,7 @@
   <div id="app">
     <div class="container-fluied" id="content">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <span class="navbar-brand nav-title" href="#">张月铭博物馆</span>
+        <span class="navbar-brand nav-title" href="#">启铭星博物馆</span>
         <button
           class="navbar-toggler toggle-button"
           type="button"
@@ -40,6 +40,9 @@
             </li>
             <li class="nav-item">
               <router-link to="/about" class="nav-link">About</router-link>
+            </li>
+            <li class="nav-item" v-if="this.$store.getters.login">
+              <router-link to="/secret" class="nav-link">Secret</router-link>
             </li>
           </ul>
         </div>
