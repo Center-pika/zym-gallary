@@ -52,9 +52,9 @@
         <p>Loading...</p>
       </div>
       <div v-if="this.allLoaded">
-        <div >
+        <div>
           <h3>Photoed By SNH-48 张月铭</h3>
-          <p>Presented By 中心皮卡丘</p>
+          <p>Presented By 阿皮</p>
         </div>
       </div>
     </div>
@@ -69,6 +69,7 @@ export default {
   components: {},
   props: {
     base: String,
+    year: String
   },
   data() {
     return {
@@ -87,7 +88,12 @@ export default {
     getData() {
       let that = this;
       this.months = [];
-      axios.get("/api/gallary.php").then((res) => {
+      console.log(this.year)
+      var url = "/api/gallary.php"
+      if (this.year != undefined) {
+        url += "?year=" + this.year
+      }
+      axios.get(url).then((res) => {
         var tmp = {};
         for (const index in res.data) {
           let item = res.data[index];

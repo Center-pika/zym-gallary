@@ -19,6 +19,15 @@ export default new Router({
             }
         },
         {
+            path: '/gallary/:year',
+            name: 'Gallary-year',
+            component: Gallary,
+            meta: {
+                title: '启铭星博物馆'
+            },
+            props: true
+        },
+        {
             path: '/about',
             name: 'About',
             component: About,

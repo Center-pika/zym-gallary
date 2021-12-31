@@ -32,8 +32,13 @@
                 aria-labelledby="navbarDropdown"
               >
                 <li>
-                  <router-link to="/" class="dropdown-item"
-                    >2021 起航</router-link
+                  <router-link :to="{name: 'Gallary-year', params: { year: '2022' }}" class="dropdown-item">
+                    2022 峨眉月
+                  </router-link>
+                </li>
+                <li>
+                  <router-link :to="{name: 'Gallary-year', params: { year: '2021' }}"  class="dropdown-item"
+                    >2021 新月</router-link
                   >
                 </li>
               </ul>
@@ -48,7 +53,7 @@
         </div>
       </nav>
     </div>
-    <router-view :base="this.base" />
+    <router-view :base="this.base" :key="$route.path"/>
   </div>
 </template>
 <script>
@@ -71,7 +76,9 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-html,body,#app {
+html,
+body,
+#app {
   background-color: #262d33;
 }
 a {
